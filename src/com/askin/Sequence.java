@@ -17,17 +17,19 @@ public class Sequence {
 
     }
 
+
+    //This method analyzes incoming sequence, parses it, and creates corresponding nucleotides.
     public void pushNucleotides(String sequenceAsString){
         char[] sequenceArray = sequenceAsString.toCharArray();
         for (char n : sequenceArray) {
             Nucleotide nuc = new Nucleotide();
-            if (n == 'A') {
+            if (n == 'A' ||n=='a') {
                 nuc.type = 0;
-            } else if (n == 'C') {
+            } else if (n == 'C' || n=='c') {
                 nuc.type = 1;
-            } else if (n == 'G') {
+            } else if (n == 'G' ||n=='g') {
                 nuc.type = 2;
-            } else if (n == 'U') {
+            } else if (n == 'U' ||n=='u') {
                 nuc.type = 3;
             }else{
                 nuc.type = 4;
@@ -40,6 +42,8 @@ public class Sequence {
     }
 
 
+
+    //This method decides which nucletodies need to be printed, and concats them into a string.
     public String prettyPrint(int row){
         int startsAt = 60*row;
 
@@ -55,8 +59,7 @@ public class Sequence {
         return sequenceString;
     }
 
-
-
+    //This is a method for exporting sequences. If we need to
     public String printSequence(){
         String sequenceString = "";
         for (Nucleotide n:nucleotides) {
@@ -66,6 +69,8 @@ public class Sequence {
         return sequenceName + " > " + sequenceString;
     }
 
+
+    //To obtain counts of different nucleotides.
     public int GetCount(int type) {
         int count = 0;
 

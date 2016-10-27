@@ -22,6 +22,10 @@ public class FastaTool {
     public Integer totalu =0;
     public Integer totalnull = 0;
 
+    public static Integer ROW_LENGTH= 60;
+
+    public Integer lastNucleotideCount = 0;
+
 
     public FastaTool(List<String> lines){
 
@@ -42,7 +46,7 @@ public class FastaTool {
 
         }
 
-
+        //Calculation of the longest sequence length
         longestSequenceLength = 0;
         for(Sequence s : allSequences){
             if(s.GetLength() > longestSequenceLength){
@@ -51,6 +55,7 @@ public class FastaTool {
 
         }
 
+        //Calculation of the shortest sequence length
         shortestSequenceLength = (int)longestSequenceLength;
         for(Sequence s: allSequences){
             if(s.GetLength() < shortestSequenceLength){
@@ -60,14 +65,22 @@ public class FastaTool {
             }
         }
 
+
+        //Calculation of the total sequence length
         totalSequenceLength = 0;
         for(Sequence s:allSequences){
             totalSequenceLength += s.GetLength();
         }
 
-        rowCount = (longestSequenceLength / 60) +1;
+        //To decide how many rows we need to print
+        rowCount = (longestSequenceLength / ROW_LENGTH) +1;
+
+        //This is going to be used in printing the last row's header
+        lastNucleotideCount = longestSequenceLength % ROW_LENGTH;
 
 
+
+        //Counting of each nucleotide
         for(Sequence s :allSequences){
             totala += s.GetCount(0);
             totalc += s.GetCount(1);

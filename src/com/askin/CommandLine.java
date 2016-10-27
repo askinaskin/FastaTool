@@ -26,18 +26,17 @@ public class CommandLine {
         }
 
 
-        FastaTool ft = new FastaTool(lines);
+        FastaTool ft = new FastaTool(lines); //FastaTool class is the main class for calculations.
+                                            //Rest of this class only prints out results.
 
 
 
-        String nameFormat = "%-30s%s%n";
+
         for (int i =0;i<ft.rowCount;i++){
 
-            for(Sequence s : ft.allSequences){
+            printRowHeader(i,ft); //Prints header
+            printRow(i,ft); //Prints row
 
-                System.out.printf(nameFormat,s.sequenceName,s.prettyPrint(i));
-
-            }
             System.out.print("\n\n");
 
         }
@@ -53,4 +52,43 @@ public class CommandLine {
 
 
     }
+
+    void printRow(int i, FastaTool ft){
+        String nameFormat = "%-30s%s%n";
+
+        for(Sequence s : ft.allSequences){
+
+            System.out.printf(nameFormat,s.sequenceName,s.prettyPrint(i));
+
+        }
+    }
+
+    /**
+     * Pretty printing method for row header
+     */
+    void printRowHeader(int i,FastaTool ft){
+        String rowHeader = "";
+        for(int k=0;k<30;k++){
+            rowHeader +=" ";
+        }
+        rowHeader+=(60*i)+1;
+        if(i == ft.rowCount-1){ //If this is the last row, we need to get the longest nucleotide's modulus with 60
+            for(int k=0;k<(ft.lastNucleotideCount-3);k++){
+                rowHeader +=" ";
+            }
+
+            rowHeader+=(60*i)+ft.lastNucleotideCount;
+        }else{
+
+            for(int k=0;k<(60-3);k++){
+                rowHeader +=" ";
+            }
+
+            rowHeader+=60*(i+1);
+        }
+
+        System.out.println(rowHeader);
+    }
+
+
 }

@@ -13,6 +13,7 @@ public class Nucleotide {
     // 3=> U
     // 4=> -
 
+    //Prints self
     public String printNucleotide(){
         if(type == 0){
             return "A";
